@@ -1,54 +1,103 @@
-# sv
+# Khwarizmi ConnectHub
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Aplikasi web CRM & customer support. Pelanggan chat lewat widget di website demo,
+pesan otomatis menjadi tiket, ditugaskan ke agent, dan tampil realtime di shared inbox.
+Dilengkapi SLA, automation, dan webhook simulasi yang aman.
 
-## Creating a project
+> Status: dalam pengerjaan (Minggu 1)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Link
 
-```sh
-# create a new project
-npx sv create my-app
+- Repository: <https://github.com/framadhanalmubarak-dotcom/customer-support>
+- Staging: menyusul
+- Website demo (widget chat): menyusul
+
+## Fitur
+
+- Login & akses: role Admin, Supervisor, Agent (izin dicek di backend)
+- Pelanggan: kontak, perusahaan, riwayat tiket
+- Ticketing: kategori, prioritas, status, assignment, internal notes
+- Shared inbox: pesan pelanggan dan balasan agent dalam satu percakapan
+- Widget chat untuk website demo
+- Realtime: pesan masuk tampil tanpa refresh
+- Automation: auto-assignment dan pengingat via background job
+- SLA & laporan: deadline respons, tiket telat, backlog, metrik agent
+
+## Tantangan advanced
+
+| Kode | Tantangan | Status |
+| --- | --- | --- |
+| C1 | Reconnect: ambil pesan yang terlewat tanpa duplikat | Menyusul |
+| C2 | Job retry yang aman dan tidak menimbulkan efek ganda | Menyusul |
+| C3 | SLA engine (jam kerja Senin-Jumat 09.00-17.00 WIB) | Menyusul |
+| C4 | Webhook dengan verifikasi signature dan anti event ganda | Menyusul |
+
+## Stack
+
+- SvelteKit (TypeScript)
+- Cloudflare Workers (adapter-cloudflare), D1, Durable Objects, Queues
+- Vitest, ESLint, Prettier
+
+## Cara install
+
+Prasyarat: Node.js (versi LTS) dan npm.
+
+```bash
+git clone https://github.com/framadhanalmubarak-dotcom/customer-support.git
+cd customer-support
+npm install
+npm run gen
 ```
 
-To recreate this project with the same configuration:
+## Konfigurasi lingkungan
 
-```sh
-# recreate this project
-npx sv@1.3.0 create --template minimal --types ts --add prettier eslint vitest="usages:unit,component" sveltekit-adapter="adapter:cloudflare+cfTarget:workers" --install npm .
-```
+Belum ada variabel lingkungan yang dibutuhkan. Bagian ini akan diisi seiring pengerjaan
+(misalnya secret untuk signature webhook).
 
-## Adding features
+File `.env` dan `.dev.vars` tidak boleh di-commit. Jangan menyimpan password,
+token, atau data asli di repository.
 
-Add features to your project with `sv add`:
+## Menjalankan aplikasi
 
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+Buka <http://localhost:5173>
 
-To create a production version of your app:
+## Database dan seed data
 
-```sh
-npm run build
+Menyusul: perintah migration dan seed.
+
+Seed berisi minimal 50 pelanggan, 100 tiket, 3 agent, contoh chat, dan kasus SLA.
+
+## Menjalankan test
+
+```bash
+npm run test
 ```
 
-You can preview the production build with `npm run preview`.
+Target: minimal 15 automated tests yang menguji aturan bisnis, izin akses,
+dan edge case penting.
+
+## Akun demo
+
+| Role | Email | Password |
+| --- | --- | --- |
+| Admin | menyusul | menyusul |
+| Supervisor | menyusul | menyusul |
+| Agent | menyusul | menyusul |
+
+Akun ini hanya untuk demo, bukan akun asli.
+
+## Dokumentasi
+
+- Kebutuhan: [docs/requirements.md](docs/requirements.md)
+- ERD: docs/erd.md (menyusul)
+- Kontrak dan dokumentasi API: docs/api.md (menyusul)
+- Keputusan teknis: docs/DECISIONS.md (menyusul)
+
+## Penggunaan AI
+
+AI dipakai untuk belajar, mencari referensi, dan review kode. Seluruh kode yang
+digunakan sudah dipahami dan dapat dijelaskan. Detail dicatat di docs/DECISIONS.md.
